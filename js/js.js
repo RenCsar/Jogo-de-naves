@@ -131,7 +131,7 @@ function start() {
       $("#disparo").css("top",topoTiro);
       $("#disparo").css("left",tiroX);
       
-      var tempoDisparo=window.setInterval(executaDisparo, 15); // Para alterar a velocidade do disparo mude o valor 15
+      var tempoDisparo=window.setInterval(executaDisparo, 30); 
     
     } //Fecha podeAtirar
  
@@ -183,24 +183,48 @@ function start() {
         
       reposicionaInimigo2();        
     }	
+
+      // Disparo com o inimigo1
+		
+    if (colisao3.length>0) {	
+      
+      inimigo1X = parseInt($("#inimigo1").css("left"));
+      inimigo1Y = parseInt($("#inimigo1").css("top"));
+        
+      explosao1(inimigo1X,inimigo1Y);
+      $("#disparo").css("left",950);
+        
+      posicaoY = parseInt(Math.random() * 334);
+      $("#inimigo1").css("left",694);
+      $("#inimigo1").css("top",posicaoY);
+        
+    }
+
+    // Disparo com o inimigo2
+		
+    if (colisao4.length>0) {
+      
+      inimigo2X = parseInt($("#inimigo2").css("left"));
+      inimigo2Y = parseInt($("#inimigo2").css("top"));
+      $("#inimigo2").remove();
+    
+      explosao2(inimigo2X,inimigo2Y);
+      $("#disparo").css("left",950);
+      
+      reposicionaInimigo2();
+        
+    }
+
+    // jogador com o amigo
+		
+    if (colisao5.length>0) {
+      
+      reposicionaAmigo();
+      $("#amigo").remove();
+      }
+  
     
   } //Fim da função colisao()
-
-  // Disparo com o inimigo1
-		
-	if (colisao3.length>0) {	
-		
-    inimigo1X = parseInt($("#inimigo1").css("left"));
-    inimigo1Y = parseInt($("#inimigo1").css("top"));
-      
-    explosao1(inimigo1X,inimigo1Y);
-    $("#disparo").css("left",950);
-      
-    posicaoY = parseInt(Math.random() * 334);
-    $("#inimigo1").css("left",694);
-    $("#inimigo1").css("top",posicaoY);
-      
-  }
 
   //Explosão 1
   function explosao1(inimigo1X,inimigo1Y) {
@@ -265,6 +289,25 @@ function start() {
       
       
   } // Fim da função explosao2()
+ 
   
+  //Reposiciona Amigo
+	function reposicionaAmigo() {
+	
+    var tempoAmigo=window.setInterval(reposiciona6, 6000);
+    
+    function reposiciona6() {
+      window.clearInterval(tempoAmigo);
+      tempoAmigo=null;
+      
+      if (fimdejogo==false) {
+      
+        $("#fundoGame").append("<div id='amigo' class='anima3'></div>");
+      
+      }
+      
+    }
+    
+  } // Fim da função reposicionaAmigo()
 
 }
