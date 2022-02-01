@@ -8,7 +8,8 @@ function start() {
 
   //Principais variáveis do jogo
 
-  var jogo = {}
+  var jogo = {};
+  var podeAtirar=true;
   var velocidade=15;
   var posicaoY = parseInt(Math.random() * 334);
   var TECLA = {
@@ -39,6 +40,7 @@ function start() {
     moveinimigo1();
     moveinimigo2();
     moveamigo();
+    disparo();
   } // Fim da função loop()
 
   //Função que movimenta o fundo do jogo
@@ -112,5 +114,38 @@ function moveamigo() {
 		}
 
 } // fim da função moveamigo()
+
+function disparo() {
+	
+	if (podeAtirar==true) {
+		
+	podeAtirar=false;
+	
+	topo = parseInt($("#jogador").css("top"))
+	posicaoX= parseInt($("#jogador").css("left"))
+	tiroX = posicaoX + 190;
+	topoTiro=topo+37;
+	$("#fundoGame").append("<div id='disparo'></div");
+	$("#disparo").css("top",topoTiro);
+	$("#disparo").css("left",tiroX);
+	
+	var tempoDisparo=window.setInterval(executaDisparo, 15); // Para alterar a velocidade do disparo mude o valor 15
+	
+	} //Fecha podeAtirar
+ 
+   	    function executaDisparo() {
+	    posicaoX = parseInt($("#disparo").css("left"));
+	    $("#disparo").css("left",posicaoX+20); // Também altera a velocidade do disparo
+
+        		if (posicaoX>900) {
+						
+			window.clearInterval(tempoDisparo);
+			tempoDisparo=null;
+			$("#disparo").remove();
+			podeAtirar=true;
+					
+                   }
+	} // Fecha executaDisparo()
+} // Fecha disparo()
 
 }
