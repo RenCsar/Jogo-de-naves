@@ -17,7 +17,8 @@ function start() {
   var energiaAtual=3;
   var podeAtirar=true;
   var fimdejogo=false;
-  var velocidade=15;
+  var velocidade=5; // Mude o valor "5" para aumentar a velocidade do jogo.
+  // No if colisão 3 temos "velocidade=velocidade+0.3;" que acrescenta a velocidade a cada inimigo morto.
   var posicaoY = parseInt(Math.random() * 334);
   var TECLA = {
     W: 87,
@@ -198,6 +199,7 @@ function start() {
 		
     if (colisao3.length>0) {	
       
+      velocidade=velocidade+0.3;
       pontos=pontos+100;
       inimigo1X = parseInt($("#inimigo1").css("left"));
       inimigo1Y = parseInt($("#inimigo1").css("top"));
